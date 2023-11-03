@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+// const koreanTime = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
 const productsSchema = new mongoose.Schema({
   pdTitle: {
     type: String,
@@ -20,7 +20,7 @@ const productsSchema = new mongoose.Schema({
   },
   pdDate: {
     type: Date,
-    default: Date.now(),
+    default: new Date(),
   },
   pdState: {
     type: Boolean,

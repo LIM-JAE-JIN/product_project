@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
 
+// env 환경변수 불러오기
+require('dotenv').config();
+const dbURL = process.env.DATABASE_URL;
+
 const connect = () => {
   mongoose
-    .connect("mongodb://127.0.0.1:27017/product_project")
+    .connect(dbURL)
     .catch(err => console.log(err));
 }
 

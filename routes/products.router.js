@@ -4,14 +4,17 @@ const router = express.Router();
 const Products = require("../schemas/products.shema.js");
 
 // 상품 목록 조회
-router.get("/", async (req, res) => {
+router.get("/products", async (req, res) => {
   const products = await Products.find({});
 
-  res.json({ products });
+  const productsList = products.map((item) => {
+    return item.sort((a, b) => b.pdDate - a.pdDate);
+  })
+  res.json({ productsList });
 });
 
 // 상품 상세 조회
-router.get("/:_id", async (req, res) => {
+router.get("/products/detail/:_id", async (req, res) => {
   const { _id } = req.params;
   const products = await Products.find({});
 
@@ -24,7 +27,7 @@ router.get("/:_id", async (req, res) => {
 })
 
 // 상품 등록
-router.post("/create", async (req, res) => {
+router.post("/products/create", async (req, res) => {
   const { pdTitle, pdContent, nickName, pdPassword } = req.body;
 
   const nickNames = await Products.find({ nickName });
@@ -42,7 +45,7 @@ router.post("/create", async (req, res) => {
 });
 
 // 상품 정보 수정
-router.put("/edit/:_id", async (req, res) => {
+router.put("/products/edit/:_id", async (req, res) => {
   const { _id } = req.params;
   const { pdTitle, pdContent, pdPassword, pdState } = req.body;
 
@@ -68,7 +71,7 @@ router.put("/edit/:_id", async (req, res) => {
 })
 
 // 상품 삭제
-router.delete("/:_id", async (req, res) => {
+router.delete("/products/detail/:_id", async (req, res) => {
   const { _id } = req.params;
   const { pdPassword } = req.body;
 

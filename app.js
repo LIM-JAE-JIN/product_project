@@ -13,7 +13,7 @@ connect();
 app.use(express.json());
 
 // product라우터 기본주소 및 라우터 불러오기
-app.use("/product", [productsRouter]);
+app.use("/api", [productsRouter]);
 
 // test
 app.get('/', (req, res) => {

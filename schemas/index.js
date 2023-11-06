@@ -7,6 +7,9 @@ const dbURL = process.env.DATABASE_URL;
 const connect = () => {
   mongoose
     .connect(dbURL)
+    .then(() => {
+      console.log('DB연결 시작!');
+    })
     .catch(err => console.log(err));
 }
 

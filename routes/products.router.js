@@ -6,11 +6,10 @@ const Products = require("../schemas/products.shema.js");
 // 상품 목록 조회
 router.get("/products", async (req, res) => {
   const products = await Products.find({});
+  products.sort((a, b) => b.pdDate - a.pdDate);
 
-  const productsList = products.map((item) => {
-    return item.sort((a, b) => b.pdDate - a.pdDate);
-  })
-  res.json({ productsList });
+  console.log(products);
+  res.json({ products });
 });
 
 // 상품 상세 조회
